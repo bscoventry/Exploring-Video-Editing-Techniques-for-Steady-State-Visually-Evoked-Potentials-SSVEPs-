@@ -15,3 +15,5 @@ Original ID=Video ID referred to in paper
 #D1=B2
 #E2=B3
 #F1=B4
+
+FlickerAnalysis.py is the source code for detecting true flicker rates after induced latency from openvibe. FlickerAnalysis.py is not necessary for main data analysis pipeline.=
