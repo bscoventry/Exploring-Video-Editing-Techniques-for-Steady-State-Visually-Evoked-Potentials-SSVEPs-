@@ -79,8 +79,6 @@ def snr_spectrum(psd, noise_n_neighbor_freqs=1, noise_skip_neighbor_freqs=1):
     return psd / mean_noise
 
 
-#save_path = 'C:/Users/cmkro/Documents/2025_Research/SSVEP_Analysis/CleanedData/cleaned-epo.fif'
-#save_path = 'C:/Users/cmkro/Documents/2025_Research/SSVEP_Projections_Paper_2025/Verified_Analysis_Nov2025/FinalResults/cleaned-epo-Jan21.fif'
 save_path = 'C:/Users/cmkro/Documents/2026_Research/SSVEP_Projections_Paper_2026/FinalResults/EEG_Analysis/cleaned-epo-Jan21.fif'
 #Looks in current working directory by default
 epochs_clean = mne.read_epochs(save_path, preload=True)
@@ -330,6 +328,7 @@ df_pivoted = df_detailed.pivot_table(
 ).reset_index()                      # Flatten the index for a clean table
 
 # Save Pivoted Data file
+#not saving while getting topographies
 #df_pivoted.to_csv('snr_pivoted_output_final.csv', index=False)
 
 #IMPORTANT****
@@ -359,11 +358,14 @@ snrs_H1_chaverage = snrs_H1.mean(axis=0)
 
 fig, ax = plt.subplots(1)
 
+vlimMax = 11;
+vlimMin = 1;
+
 im, _ = mne.viz.plot_topomap(
     snrs_H1_chaverage,
     epochs_clean.info,
     #vlim=(1, None),
-    vlim=(1, 25),
+    vlim=(vlimMin, vlimMax),
     axes=ax,
     show=False
 )
@@ -373,16 +375,6 @@ cbar.set_label("SNR (a.u.)")
 #arbitrary units here
 
 plt.show()
-
-
-
-
-
-
-
-
-
-
 
 
 #H2
@@ -397,17 +389,16 @@ im, _ = mne.viz.plot_topomap(
     snrs_H2_chaverage,
     epochs_clean.info,
     #vlim=(1, None),
-    vlim=(1, 25),
+    vlim=(vlimMin, vlimMax),
     axes=ax,
     show=False
 )
 
-cbar = fig.colorbar(im, ax=ax)
-cbar.set_label("SNR (a.u.)")
+#cbar = fig.colorbar(im, ax=ax)
+#cbar.set_label("SNR (a.u.)")
 #arbitrary units here
 
 plt.show()
-
 
 
 
@@ -416,15 +407,44 @@ snrs_H3 = snrs[i_trial_H3, :, i_bin_3hz]
 snrs_H3_chaverage = snrs_H3.mean(axis=0)
 # plot SNR topography
 fig, ax = plt.subplots(1)
-mne.viz.plot_topomap(snrs_H3_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+#mne.viz.plot_topomap(snrs_H3_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+
+im, _ = mne.viz.plot_topomap(
+    snrs_H3_chaverage,
+    epochs_clean.info,
+    #vlim=(1, None),
+    vlim=(vlimMin, vlimMax),
+    axes=ax,
+    show=False
+)
+
+#cbar = fig.colorbar(im, ax=ax)
+#cbar.set_label("SNR (a.u.)")
+#arbitrary units here
+
+plt.show()
 
 #H4 at 3hz
 snrs_H4 = snrs[i_trial_H4, :, i_bin_A4_hz]
 snrs_H4_chaverage = snrs_H4.mean(axis=0)
 # plot SNR topography
 fig, ax = plt.subplots(1)
-mne.viz.plot_topomap(snrs_H4_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+#mne.viz.plot_topomap(snrs_H4_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
 
+im, _ = mne.viz.plot_topomap(
+    snrs_H4_chaverage,
+    epochs_clean.info,
+    #vlim=(1, None),
+    vlim=(vlimMin, vlimMax),
+    axes=ax,
+    show=False
+)
+
+#cbar = fig.colorbar(im, ax=ax)
+#cbar.set_label("SNR (a.u.)")
+#arbitrary units here
+
+plt.show()
 
 # get average SNR at 6 Hz for ALL channels
 #C1
@@ -432,30 +452,88 @@ snrs_C1 = snrs[i_trial_C1, :, i_bin_6hz]
 snrs_C1_chaverage = snrs_C1.mean(axis=0)
 # plot SNR topography
 fig, ax = plt.subplots(1)
-mne.viz.plot_topomap(snrs_C1_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+#mne.viz.plot_topomap(snrs_C1_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+
+im, _ = mne.viz.plot_topomap(
+    snrs_C1_chaverage,
+    epochs_clean.info,
+    #vlim=(1, None),
+    vlim=(vlimMin, vlimMax),
+    axes=ax,
+    show=False
+)
+
+#cbar = fig.colorbar(im, ax=ax)
+#cbar.set_label("SNR (a.u.)")
+#arbitrary units here
+
+plt.show()
 
 #D1
 snrs_D1 = snrs[i_trial_D1, :, i_bin_6hz]
 snrs_D1_chaverage = snrs_D1.mean(axis=0)
 # plot SNR topography
 fig, ax = plt.subplots(1)
-mne.viz.plot_topomap(snrs_D1_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+#mne.viz.plot_topomap(snrs_D1_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+
+im, _ = mne.viz.plot_topomap(
+    snrs_D1_chaverage,
+    epochs_clean.info,
+    #vlim=(1, None),
+    vlim=(vlimMin, vlimMax),
+    axes=ax,
+    show=False
+)
+
+#cbar = fig.colorbar(im, ax=ax)
+#cbar.set_label("SNR (a.u.)")
+#arbitrary units here
+
+plt.show()
 
 #E2
 snrs_E2 = snrs[i_trial_E2, :, i_bin_6hz]
 snrs_E2_chaverage = snrs_E2.mean(axis=0)
 # plot SNR topography
 fig, ax = plt.subplots(1)
-mne.viz.plot_topomap(snrs_E2_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+#mne.viz.plot_topomap(snrs_E2_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+
+im, _ = mne.viz.plot_topomap(
+    snrs_E2_chaverage,
+    epochs_clean.info,
+    #vlim=(1, None),
+    vlim=(vlimMin, vlimMax),
+    axes=ax,
+    show=False
+)
+
+#cbar = fig.colorbar(im, ax=ax)
+#cbar.set_label("SNR (a.u.)")
+#arbitrary units here
+
+plt.show()
 
 #F1
 snrs_F1 = snrs[i_trial_F1, :, i_bin_B4_hz]
 snrs_F1_chaverage = snrs_F1.mean(axis=0)
 # plot SNR topography
 fig, ax = plt.subplots(1)
-mne.viz.plot_topomap(snrs_F1_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
+#mne.viz.plot_topomap(snrs_F1_chaverage, epochs_clean.info, vlim=(1, None), axes=ax)
 
+im, _ = mne.viz.plot_topomap(
+    snrs_F1_chaverage,
+    epochs_clean.info,
+    #vlim=(1, None),
+    vlim=(vlimMin, vlimMax),
+    axes=ax,
+    show=False
+)
 
+#cbar = fig.colorbar(im, ax=ax)
+#cbar.set_label("SNR (a.u.)")
+#arbitrary units here
+
+plt.show()
 
 
 exit()
